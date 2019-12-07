@@ -1,0 +1,6 @@
+build:
+	mkdir -p functions
+	go get ./...
+	go build -o functions/app ./src/...
+	hugo --gc --minify -b $(URL)
+
