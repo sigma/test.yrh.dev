@@ -43,6 +43,9 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
 		Body:       buf.String(),
+		Headers: map[string]string{
+			"Cache-Control": "no-store",
+		},
 	}, nil
 }
 
