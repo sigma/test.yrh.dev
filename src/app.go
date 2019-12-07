@@ -19,9 +19,11 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 
 	cc := lc.ClientContext
 
+	body := "Hello, " + cc.Client.AppTitle + ". env = " + cc.Env + ". custom = " + cc.Custom
+
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       "Hello, " + cc.Client.AppTitle,
+		Body:       body,
 	}, nil
 }
 
