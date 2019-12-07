@@ -1,2 +1,2 @@
-/:repo/*	go-get=1	/.netlify/functions/vanity?repo=:repo	200!
+/:repo/*	go-get=1	/.netlify/functions/vanity?repo=:repo	301!
 
