@@ -3,8 +3,6 @@ package main
 import (
 	"bytes"
 	"context"
-	"log"
-	"strings"
 	"text/template"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -17,9 +15,7 @@ var (
 )
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	path := request.QueryStringParameters["path"]
-	log.Println(">>>", path)
-	repo := strings.Split(path, "/")[0]
+	repo := request.QueryStringParameters["repo"]
 	tpl := `
 <!doctype html>
 <html>
