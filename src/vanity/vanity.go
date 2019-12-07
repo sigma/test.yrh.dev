@@ -40,7 +40,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 		StatusCode: 200,
 		Body:       buf.String(),
 		Headers: map[string]string{
-			"Cache-Control": "no-store",
+			"Cache-Control": "public, max-age=31536000",
 		},
 	}, nil
 }
