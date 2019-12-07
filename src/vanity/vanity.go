@@ -24,7 +24,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
   <head>
     <meta charset=utf-8>
     <meta name=go-import content="{{.Vanity}}/{{.Repo}} git https://github.com/{{.User}}/{{.Repo}}">
-	<meta name=go-source content="{{.Vanity}}/{{.Repo}} https://github.com/{{.User}}/{{.Repo}} https://github.com/{{.User}}/{{.Repo}}/tree/master{/dir} https://github.com/{{.User}}/{{.Repo}}/blob/master{/dir}/{file}#L{line}">
+    <meta name=go-source content="{{.Vanity}}/{{.Repo}} https://github.com/{{.User}}/{{.Repo}} https://github.com/{{.User}}/{{.Repo}}/tree/master{/dir} https://github.com/{{.User}}/{{.Repo}}/blob/master{/dir}/{file}#L{line}">
   </head>
 </html>
 `
