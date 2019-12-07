@@ -1,9 +1,11 @@
 [build]
 publish = "public"
 command = "make build"
+functions = "functions"
 
 [context.production.environment]
 HUGO_VERSION = "0.60.1"
 HUGO_ENV = "production"
 HUGO_ENABLEGITINFO = "true"
+GO_IMPORT_PATH = "github.com/sigma/test.yrh.dev"
 
