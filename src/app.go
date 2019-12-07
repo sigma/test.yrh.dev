@@ -1,35 +1,48 @@
 package main
 
 import (
+	"bytes"
 	"context"
-	"fmt"
+	"text/template"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/aws/aws-lambda-go/lambdacontext"
+)
+
+var (
+	vanity string
+	user   string
 )
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	lc, ok := lambdacontext.FromContext(ctx)
-	if !ok {
+	path := request.QueryStringParameters["path"]
+	tpl := `
+<!doctype html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <meta name=go-import content="{{.Vanity}}/{{.Path}} git https://github.com/{{.User}}/{{.Path}}">
+    <meta name=go-source content="{{.Vanity}}/{{.Path}} https://github.com/{{.User}}/{{.Path}} https://github.com/{{.User}}/{{.Path}}/tree/master{/dir} https://github.com/{{.User}}/{{.Path}}/blob/master{/dir}/{file}#L{line}">
+    <meta http-equiv=refresh content="0; url=https://github.com/{{.User}}/{{.Path}}">
+  </head>
+</html>
+`
+
+	buf := new(bytes.Buffer)
+	obj := struct{ Vanity, User, Path string }{vanity, user, path}
+	if err := template.Must(template.New("goget").Parse(tpl)).Execute(buf, obj); err != nil {
 		return &events.APIGatewayProxyResponse{
-			StatusCode: 503,
-			Body:       "Something went wrong :(",
+			StatusCode: 500,
+			Body:       err.Error(),
 		}, nil
 	}
 
-	cc := lc.ClientContext
-
-	body := fmt.Sprintf("env = %s. custom = %s. rss = %s. path = %s. headers = %s. params = %s.", cc.Env, cc.Custom, request.Resource, request.Path, request.Headers, request.QueryStringParameters)
-
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       body,
+		Body:       buf.String(),
 	}, nil
 }
 
 func main() {
-	// Make the handler available for Remote Procedure Call by AWS Lambda
 	lambda.Start(handler)
 }
-

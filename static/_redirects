@@ -1,2 +1,1 @@
-/app/*	/.netlify/functions/app?path=:splat
-
+/go-emacs/* /.netlify/functions/app?path=:path
