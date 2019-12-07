@@ -1,2 +1,2 @@
-/app	/.netlify/functions/app
+/app/*	/.netlify/functions/app?path=:splat
 
