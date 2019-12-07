@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"context"
+	"log"
 	"strings"
 	"text/template"
 
@@ -17,6 +18,7 @@ var (
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	path := request.QueryStringParameters["path"]
+	log.Println(">>>", path)
 	repo := strings.Split(path, "/")[0]
 	tpl := `
 <!doctype html>
