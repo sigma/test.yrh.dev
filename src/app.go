@@ -20,7 +20,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 
 	cc := lc.ClientContext
 
-	body := fmt.Sprintf("env = %s. custom = %s", cc.Env, cc.Custom)
+	body := fmt.Sprintf("env = %s. custom = %s. rss = %s. path = %s. headers = %s. params = %s.", cc.Env, cc.Custom, request.Resource, request.Path, request.Headers, request.QueryStringParameters)
 
 	return &events.APIGatewayProxyResponse{
 		StatusCode: 200,
