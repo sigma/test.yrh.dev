@@ -1,1 +1,1 @@
-/*	go-get=1	/.netlify/functions/app?path=:splat
+/*	go-get=1	/.netlify/functions/vanity?path=:splat
