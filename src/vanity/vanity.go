@@ -15,7 +15,7 @@ var (
 )
 
 func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	repo := request.QueryStringParameters["repo"]
+	repo := request.Headers["X-Repo"]
 	tpl := `
 <!doctype html>
 <html>
@@ -45,6 +45,7 @@ func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 		Body:       buf.String(),
 		Headers: map[string]string{
 			"Cache-Control": "public, max-age=31536000",
+			"Vary":          "X-Repo",
 		},
 	}, nil
 }
