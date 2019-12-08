@@ -11,8 +11,8 @@ GO_IMPORT_PATH = "github.com/sigma/test.yrh.dev"
 
 [[redirects]]
   from = "/:repo/*"
-  to = "/.netlify/functions/vanity_v2"
+  to = "/.netlify/functions/vanity_v3"
   status = 200
   force = true
   query = {go-get = "1"}
-  headers = {X-Repo = ":repo"}
+  headers = {X-Repo = "gh-vanity"}
